@@ -8,8 +8,8 @@ appended to an audit log with the reason. The broker itself sits behind a swappa
 same tool surface runs against an on-disk simulator or a live MetaTrader 5 terminal without the
 model knowing which.
 
-Built for an agent that ran unattended against a $100k prop-firm evaluation account, where a
-mis-sized order was not a failed test.
+Built for an agent that, on its own channel, submitted orders against a $100k prop-firm evaluation
+account without per-trade human approval, where a mis-sized order was not a failed test.
 
 ---
 

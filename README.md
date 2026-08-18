@@ -63,7 +63,7 @@ Seven tools: `order_submit` · `order_modify` · `order_close` · `close_all` ·
    server.py  ── MCP stdio server, tool schemas + dispatch
           │
           ▼
-   safety.py  ── 8 gates, audit log, kill switch     ◄── refuses here, before the broker
+   safety.py  ── 7 gates, audit log, kill switch     ◄── refuses here, before the broker
           │
           ▼
    backends/  ── swappable

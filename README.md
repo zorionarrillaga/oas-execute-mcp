@@ -2,8 +2,9 @@
 
 An MCP server that puts a **safety layer between a language model and a broker order**.
 
-A model calls `order_submit`. Before anything reaches the broker, the request passes eight
-independent checks, any one of which can refuse it. Every attempt — allowed or refused — is
+A model calls `order_submit`. Before anything reaches the broker, the request passes six
+independent checks, any one of which can refuse it — seven across the write paths, since the
+stop-loss rule governs modifications rather than opens. Every attempt — allowed or refused — is
 appended to an audit log with the reason. The broker itself sits behind a swappable backend, so the
 same tool surface runs against an on-disk simulator or a live MetaTrader 5 terminal without the
 model knowing which.
@@ -27,7 +28,9 @@ the execution path rather than beside it in a prompt.
 
 ## The safety layer
 
-Eight checks, each able to refuse independently, all logged with a machine-readable reason:
+**Seven checks, each able to refuse independently**, all logged with a machine-readable reason.
+Six of them stand between `order_submit` and the broker; `check_sl_widen_block` governs
+modifications, so it never sees an open:
 
 | Check | Refuses when |
 |---|---|
@@ -38,7 +41,9 @@ Eight checks, each able to refuse independently, all logged with a machine-reada
 | `check_sl_widen_block` | A stop-loss modification would move the stop *away* from price. |
 | `check_session_override_kill` | Manual overrides this session exceed the allowed count. |
 | `check_live_equity_kill` | Account equity has crossed the configured floor. |
-| Audit append | Always. A refusal that leaves no record is treated as a failure. |
+
+The audit append runs after the gates on every path, allowed or refused — it is the record, not
+a check: a refusal that leaves no trace is treated as a failure of the system.
 
 `safety.py` groups these into `run_entry_safety_gates`, `run_modify_safety_gates` and
 `run_close_safety_gates`, so a close is never blocked by a rule that should only govern an open —

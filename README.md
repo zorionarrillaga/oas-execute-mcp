@@ -1,5 +1,7 @@
 # oas-execute-mcp
 
+[![M8ven Score](https://m8ven.ai/badge/mcp/zorionarrillaga/oas-execute-mcp)](https://m8ven.ai/mcp/zorionarrillaga/oas-execute-mcp?s=readme)
+
 An MCP server that puts a **safety layer between a language model and a broker order**.
 
 A model calls `order_submit`. Before anything reaches the broker, the request passes six

@@ -1,6 +1,6 @@
 # oas-execute-mcp
 
-[![M8ven Score](https://m8ven.ai/badge/mcp/zorionarrillaga/oas-execute-mcp)](https://m8ven.ai/mcp/zorionarrillaga/oas-execute-mcp?s=readme)
+[![M8ven Score](https://m8ven.ai/badge/mcp/zorionarrillaga-oas-execute-mcp-lepnzf?v=db3c07042d4985844e89d879f5b4fbab)](https://m8ven.ai/mcp/zorionarrillaga-oas-execute-mcp-lepnzf?s=readme)
 
 An MCP server that puts a **safety layer between a language model and a broker order**.
 
